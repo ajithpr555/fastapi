@@ -22,9 +22,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-
+origins=["*"]
 app.add_middleware(
-    CORSMiddleware
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # models.Base.metadata.create_all(bind=engine)
@@ -42,16 +46,11 @@ app.include_router(vote.router)
 #     print("Error",error)
     
 
-
-   
-
     
 
-# @app.get("/sqlalchemy")
-# def test_posts(db : Session = Depends(get_db)):
-#     posts=db.query(models.Post).all()
-#     return {"data" : posts}
-
+@app.get("/")
+def basic():
+     print("hello")
 
 
 
