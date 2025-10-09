@@ -7,7 +7,7 @@ from app.config import settings
 from app import schemas,models
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def session():
     SQLALCHEMY_DATABASE_URL=f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
 
@@ -26,7 +26,7 @@ def session():
     
     
     
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def client(session):    
 
     def override_get_db():
@@ -42,7 +42,7 @@ def client(session):
     
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def test_user(client):
     user_data= {"email":"test@gmail.com" , "password":"test"}
     res = client.post("/users",json={"email":user_data["email"] , "password":user_data["password"]})
