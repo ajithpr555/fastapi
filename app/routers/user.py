@@ -15,7 +15,7 @@ def create_users(user:UserCreate,db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+    return new_user 
     
 @router.get("/users/{id}",response_model = UserOut)
 def get_user(id : int, db: Session = Depends(get_db)):
