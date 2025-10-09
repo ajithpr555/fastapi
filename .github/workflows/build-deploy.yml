@@ -1,5 +1,5 @@
 name : Build and deploy code
-on: [push, pull_request]
+on: [push]
 jobs:
   job1:
     environment: 
