@@ -9,7 +9,7 @@ jobs:
       DATABASE_PORT : ${{secrets.DATABASE_PORT}}
       DATABASE_USERNAME : ${{secrets.DATABASE_USERNAME}}
       DATABASE_PASSWORD : ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME : ${{secrets.DATABASE_NAME}}
+      DATABASE_NAME : ${{secrets.DATABASE_NAME}}_test
       SECRET_KEY: ${{secrets.ECRET_KEY}}
       ALGORITHM : ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES : ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
@@ -19,7 +19,7 @@ jobs:
          image: postgres
          env:
            POSTGRES_PASSWORD : ${{secrets.DATABASE_PASSWORD}}
-           POSTGRES_DB :   ${{secrets.DATABASE_NAME}}
+           POSTGRES_DB :   ${{secrets.DATABASE_NAME}}_test
          ports: 
           - 5432:5432
          options: >-
