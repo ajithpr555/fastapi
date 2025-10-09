@@ -9,7 +9,7 @@ jobs:
       DATABASE_PORT : ${{secrets.DATABASE_PORT}}
       DATABASE_USERNAME : ${{secrets.DATABASE_USERNAME}}
       DATABASE_PASSWORD : ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME : ${{secrets.DATABASE_NAME}}_test
+      DATABASE_NAME : ${{secrets.DATABASE_NAME}}
       SECRET_KEY: ${{secrets.ECRET_KEY}}
       ALGORITHM : ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES : ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
