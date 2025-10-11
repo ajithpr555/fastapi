@@ -10,7 +10,7 @@ jobs:
       DATABASE_USERNAME : ${{secrets.DATABASE_USERNAME}}
       DATABASE_PASSWORD : ${{secrets.DATABASE_PASSWORD}}
       DATABASE_NAME : ${{secrets.DATABASE_NAME}}_test
-      SECRET_KEY: ${{secrets.ECRET_KEY}}
+      SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM : ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES : ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
 
@@ -44,6 +44,26 @@ jobs:
           run : |
             pip install pytest
             pytest
+        - name : login to docker
+          uses : docker/login-action@v3
+          with :
+            username : ${{secrets.DOCKER_HUB_USERNAME}}
+            password: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v3
+        - name: Build and test
+          uses: docker/build-push-action@v6
+          with:
+            target: test
+            load: true
+        - name : Build and push
+          uses : docker/build-push-action@v6
+          with:
+            platforms: linux/amd64,linux/arm64
+            push: true
+            target: prod
+            tags: ${{secrets.DOCKER_USERNAME}}/infinity:latest
+
           
         
               
