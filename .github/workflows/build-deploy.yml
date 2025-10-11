@@ -9,7 +9,7 @@ jobs:
       DATABASE_PORT : ${{secrets.DATABASE_PORT}}
       DATABASE_USERNAME : ${{secrets.DATABASE_USERNAME}}
       DATABASE_PASSWORD : ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME : ${{secrets.DATABASE_NAME}}_test
+      DATABASE_NAME : ${{secrets.DATABASE_NAME}}
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM : ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES : ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
@@ -19,7 +19,7 @@ jobs:
          image: postgres
          env:
            POSTGRES_PASSWORD : ${{secrets.DATABASE_PASSWORD}}
-           POSTGRES_DB :   ${{secrets.DATABASE_NAME}}_test
+           POSTGRES_DB :   ${{secrets.DATABASE_NAME}}
          ports: 
           - 5432:5432
          options: >-
@@ -59,9 +59,10 @@ jobs:
             file: .
             builder : ${{ steps.buildx.outputs.name}}
             push: true
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/infinity:latest
             cache-from: type=local,src=/tmp/.buildx-cache
             cache-to: type=local,src=/tmp/.buildx-cache
-            tags: ${{ secrets.DOCKER_USERNAME }}/infinity:latest
+            
 
           
         
