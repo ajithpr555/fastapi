@@ -61,7 +61,7 @@ jobs:
             push: true
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/infinity:latest
             cache-from: type=local,src=/tmp/.buildx-cache
-            cache-to: type=local,src=/tmp/.buildx-cache
+            cache-to: type=local,dst=/tmp/.buildx-cache
             
 
           
