@@ -1,7 +1,7 @@
 name : Build and deploy code
 on: [push]
 jobs:
-  job1:
+  build:
     environment: 
       name: testing 
     env:
@@ -60,7 +60,19 @@ jobs:
             builder : ${{ steps.buildx.outputs.name}}
             push: true
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/infinity:latest
-            
+        - name : deploy to digital ocean
+          uses: appleboy/ssh-action@master
+          with:
+           host: ${{secrets.PROD_HOST}}
+           username: ${{secrets.PROD_USERNAME}}
+           password: ${{secrets.PROD_PASSWORD}}
+           script: |
+             cd app/src
+             git pull
+             sudo systemctl restart
+
+
+
 
           
         
